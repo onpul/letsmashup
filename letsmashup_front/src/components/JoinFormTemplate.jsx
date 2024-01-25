@@ -56,6 +56,10 @@ const JoinFormBlock = styled.div`
     }
 `;
 
+const fncGoJoin = () => {
+    alert("가입하기는 추후 지원 예정입니다.");
+}
+
 function JoinFormTemplate() {
     return (
         <MainTemplate>
@@ -70,7 +74,7 @@ function JoinFormTemplate() {
                         <div className="input_box">
                             <input placeholder="비밀번호 입력" autoCapitalize="none" type="password" name="password" defaultValue={""} />
                         </div>
-                        <BtnDefault title="가입하기" className="btn_join" type="submit"></BtnDefault>
+                        <BtnDefault title="가입하기" className="btn_join" type="submit" onClick={fncGoJoin}/>
                     </form>
                 </div>
             </JoinFormBlock>
