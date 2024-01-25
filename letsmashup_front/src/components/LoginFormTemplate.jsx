@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import logo_sns from "../image/logo_sns.png";
 import MainTemplate from "./MainTemplate";
-import HeaderTemplate from "./HeaderTemplate";
+import BtnDefault from "./BtnDefault";
 
 const LoginFormBlock = styled.div`
     margin: 0 auto;
@@ -42,29 +42,6 @@ const LoginFormBlock = styled.div`
         outline: none;
     }
 
-    button {
-        cursor: pointer;
-        outline: none;
-        border: 0;
-    }
-
-    .btn_login {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 40px;
-        min-height: 25px;
-        width: 100%;
-        height: 56px;
-        margin: 20px 0 0;
-        background: #000000;
-        border-radius: 2px;
-        color: #ffffff;
-        font-size: 16px;
-        line-height: 56px;
-        font-weight: 600;
-    }
-
     .button_div {
         margin: 35px 0;
         h3 {
@@ -81,6 +58,12 @@ const LoginFormBlock = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        button {
+            cursor: pointer;
+            outline: none;
+            border: 0;
+        }
     }
 
     .btn_kakao_div,
@@ -184,7 +167,6 @@ const LoginFormBlock = styled.div`
 function LoginFormTemplate() {
     return (
         <MainTemplate>
-            <HeaderTemplate />
             <LoginFormBlock>
                 <h2 className="title_login">로그인</h2>
                 <div className="form_div">
@@ -195,9 +177,7 @@ function LoginFormTemplate() {
                         <div className="form_pw">
                             <input placeholder="비밀번호" autoCapitalize="none" type="password" name="password"></input>
                         </div>
-                        <button className="btn_login" type="submit">
-                            로그인하기
-                        </button>
+                        <BtnDefault title="로그인하기" className="btn_login" type="submit" />
                     </form>
                     <div className="button_div">
                         <h3>SNS 계정으로 로그인하기</h3>
