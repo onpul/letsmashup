@@ -4,7 +4,8 @@ import { createGlobalStyle } from "styled-components";
 import JoinFormTemplate from "./components/JoinFormTemplate";
 import LoginFormTemplate from "./components/LoginFormTemplate";
 import { Routes, Route } from "react-router-dom";
-import MainTemplate from "./components/MainTemplate";
+import Main from "./components/Main";
+// import MainTemplate from "./components/MainTemplate";
 
 const GlobalStyle = createGlobalStyle`
   /* 기본 적용 스타일 초기화 */
@@ -66,7 +67,7 @@ function App() {
       <>
           <GlobalStyle />
           <Routes>
-              <Route path="/" Component={MainTemplate} />
+              <Route path="/" Component={Main} />
               <Route path="/login" Component={LoginFormTemplate} />
               <Route path="/join" Component={JoinFormTemplate} />
           </Routes>
