@@ -24,7 +24,9 @@ function HeaderTemplate() {
         <div>
             <HeaderBlock>
                 <LogoBlock>
-                    <img src={mainLogo} className="main_logo" alt="mainLogo"></img>
+                    <a href="/">
+                        <img src={mainLogo} className="main_logo" alt="mainLogo"></img>
+                    </a>
                 </LogoBlock>
             </HeaderBlock>
         </div>

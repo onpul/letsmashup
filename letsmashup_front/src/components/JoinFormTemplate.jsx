@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MainTemplate from "./MainTemplate";
-import HeaderTemplate from "./HeaderTemplate";
+import BtnDefault from "./BtnDefault";
 
 const JoinFormBlock = styled.div`
     padding: 18px 20px 0px;
@@ -36,6 +36,7 @@ const JoinFormBlock = styled.div`
     }
 
     .btn_join {
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -58,7 +59,6 @@ const JoinFormBlock = styled.div`
 function JoinFormTemplate() {
     return (
         <MainTemplate>
-            <HeaderTemplate />
             <JoinFormBlock>
                 <div>
                     <form>
@@ -70,7 +70,7 @@ function JoinFormTemplate() {
                         <div className="input_box">
                             <input placeholder="비밀번호 입력" autoCapitalize="none" type="password" name="password" defaultValue={""} />
                         </div>
-                        <button className="btn_join" type="submit">가입하기</button>
+                        <BtnDefault title="가입하기" className="btn_join" type="submit"></BtnDefault>
                     </form>
                 </div>
             </JoinFormBlock>

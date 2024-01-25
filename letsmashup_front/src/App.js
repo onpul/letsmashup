@@ -55,7 +55,10 @@ const GlobalStyle = createGlobalStyle`
   form {
     box-sizing: border-box;
   }
-
+  a {
+        text-decoration: none;
+        color: #ffffff;
+    }
   body {
     background: #FFFFFF;
     font-family: 'campton','Apple SD Gothic Neo', 'NanumBarunGothic', '나눔바른고딕', 'Malgun Gothic', '맑은 고딕', 'dotum', 'sans-serif';
