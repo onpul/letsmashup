@@ -45,6 +45,8 @@ const JoinFormBlock = styled.div`
         height: 56px;
         margin: 20px 0 0;
         background: #000000;
+        outline: none;
+        border: 0;
         border-radius: 2px;
         color: #ffffff;
         font-size: 16px;
