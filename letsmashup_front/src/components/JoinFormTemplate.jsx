@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MainTemplate from "./MainTemplate";
 import BtnDefault from "./BtnDefault";
@@ -35,48 +35,74 @@ const JoinFormBlock = styled.div`
         margin-bottom: 40px;
     }
 
-    .btn_join {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 40px;
-        min-height: 25px;
-        width: 100%;
-        height: 56px;
-        margin: 20px 0 0;
-        background: #000000;
-        outline: none;
-        border: 0;
-        border-radius: 2px;
-        color: #ffffff;
-        font-size: 16px;
-        line-height: 56px;
-        font-weight: 600;
+    .join_proc_2 {
+        span {
+            font-size: 15px;
+            margin-left: 10px;
+            line-height: 22px;
+            font-weight: normal;
+        }
     }
 `;
 
-const fncGoJoin = () => {
-    alert("가입하기는 추후 지원 예정입니다.");
+/**
+ * 다음 프로세스 이동
+ */
+const fncGoNextProc = () => {
+
 }
 
+// const fncGoJoin = () => {
+//     alert("가입하기는 추후 지원 예정입니다.");
+// }
+
 function JoinFormTemplate() {
+    const [firstProc, setFirstProc] = useState(true);
+    const [secondProc, setSecondProc] = useState(false);
+    /**
+     * 입력 값 유효성 체크
+     */
+    const fncChkVal = () => {
+        setFirstProc(false);
+        setSecondProc(true);
+    };
+
     return (
         <MainTemplate>
             <JoinFormBlock>
-                <div>
-                    <form>
-                        <h3 className="form_notice_txt">로그인에 사용할 아이디를 입력해주세요.</h3>
-                        <div className="input_box">
-                            <input placeholder="아이디 (이메일) 입력" autoCapitalize="none" type="text" name="username" defaultValue={""} />
-                        </div>
-                        <h3 className="form_notice_txt">로그인에 사용할 비밀번호를 입력해주세요.</h3>
-                        <div className="input_box">
-                            <input placeholder="비밀번호 입력" autoCapitalize="none" type="password" name="password" defaultValue={""} />
-                        </div>
-                        <BtnDefault title="가입하기" className="btn_join" type="submit" onClick={fncGoJoin}/>
-                    </form>
-                </div>
+                {/* 아이디, 비밀번호 입력 */}
+                {firstProc ? (
+                    <div className="join_proc_1">
+                        <form>
+                            <h3 className="form_notice_txt">로그인에 사용할 아이디를 입력해주세요.</h3>
+                            <div className="input_box">
+                                <input placeholder="아이디 (이메일) 입력" autoCapitalize="none" type="text" name="username" defaultValue={""} onChange={fncChkVal} />
+                            </div>
+                            <h3 className="form_notice_txt">로그인에 사용할 비밀번호를 입력해주세요.</h3>
+                            <div className="input_box">
+                                <input placeholder="비밀번호 입력" autoCapitalize="none" type="password" name="password" defaultValue={""} />
+                            </div>
+                            <BtnDefault className="btn_join" title="다음" onClick={fncGoNextProc} disabled={true}/>
+                        </form>
+                    </div>
+                ) : (
+                    ""
+                )}
+
+                {/* 본인인증 필드 노출 */}
+                {secondProc ? (
+                    <div className="join_proc_2">
+                        <h3 className="form_notice_txt">본인인증을 진행해주세요.</h3>
+                        <svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg" className="css-wmzlvu ecos80d0">
+                            <rect y="6" width="12" height="11" fill="#375FFF"></rect>
+                            <rect x="2.5" y="0.5" width="7" height="10" rx="3.5" stroke="#375FFF"></rect>
+                        </svg>
+                        <span>안전한 거래를 위해 딱 한 번 본인인증을 진행해요.</span>
+                        <BtnDefault className="btn_join" title="본인인증하고 가입완료하기" onClick={fncGoNextProc} />
+                    </div>
+                ) : (
+                    ""
+                )}
             </JoinFormBlock>
         </MainTemplate>
     );

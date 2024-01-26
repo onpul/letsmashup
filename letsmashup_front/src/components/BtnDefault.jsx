@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const BtnDefaultBlock = styled.button`
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,12 +22,8 @@ const BtnDefaultBlock = styled.button`
 
 function BtnDefault(props) {
     return (
-        <BtnDefaultBlock className={props.className} type={props.type} onClick={props.onClick ? props.onClick : null}>
-            {props.href ? (
-                <a href={props.href}>{props.title}</a>
-            ) : (
-                props.title
-            )}
+        <BtnDefaultBlock className={props.className} onClick={props.onClick ? props.onClick : null} disabled={props.disabled}>
+            {props.href ? <a href={props.href}>{props.title}</a> : props.title}
         </BtnDefaultBlock>
     );
 }
