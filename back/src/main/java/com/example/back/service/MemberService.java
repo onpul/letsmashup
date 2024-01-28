@@ -1,9 +1,11 @@
-package com.example.letsmashup_back.service;
+package com.example.back.service;
 
-import com.example.letsmashup_back.entity.MemberEntity;
-import com.example.letsmashup_back.model.RequestMember;
-import com.example.letsmashup_back.model.ResponseMember;
-import com.example.letsmashup_back.repository.MemberRepository;
+
+
+import com.example.back.entity.MemberEntity;
+import com.example.back.model.RequestMember;
+import com.example.back.model.ResponseMember;
+import com.example.back.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

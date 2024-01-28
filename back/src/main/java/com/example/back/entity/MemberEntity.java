@@ -1,6 +1,7 @@
-package com.example.letsmashup_back.entity;
+package com.example.back.entity;
 
-import com.example.letsmashup_back.model.ResponseMember;
+
+import com.example.back.model.ResponseMember;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +43,8 @@ public class MemberEntity {
                 .memberPriId(this.memberPriId)
                 .memberId(this.memberId)
                 .passWord(this.passWord)
+                .createdAt(this.createdAt)
+                .updatedAt(this.updatedAt)
                 .build();
     }
 }
