@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MainTemplate from "./MainTemplate";
 import BtnDefault from "./BtnDefault";
+import axios from 'axios';
 
 const JoinFormBlock = styled.div`
     padding: 18px 20px 0px;
@@ -45,22 +46,19 @@ const JoinFormBlock = styled.div`
     }
 `;
 
-// const fncGoJoin = () => {
-//     alert("가입하기는 추후 지원 예정입니다.");
-// }
-
 function JoinFormTemplate() {
     const [checkID, setCheckID] = useState(false);
     const [checkPW, setCheckPW] = useState(false);
     const [firstProc, setFirstProc] = useState(true);
     const [secondProc, setSecondProc] = useState(false);
-    const [btnNextDisa, setBtnNextDisa] = useState(true);
+    const [btnNextDis, setBtnNextDis] = useState(true);
 
     /**
      * 입력 값 유효성 체크
      */
     const fncChkVal = (e) => {
         const sInputVal = e.target;
+        // eslint-disable-next-line
         const regex_id = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         const regex_pw = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#.~_-])[A-Za-z\d@$!%*?&#.~_-]{8,20}$/);
 
@@ -69,7 +67,6 @@ function JoinFormTemplate() {
             // 아이디: 이메일 형태
             // RFC 5322 호환 정규식
             // https://webcache.googleusercontent.com/search?q=cache:514Y4NDdl6sJ:https://emailregex.com/+&cd=1&hl=ko&ct=clnk&gl=kr
-            // eslint-disable-next-line
 
             if (regex_id.test(sInputVal.value)) {
                 setCheckID(true);
@@ -93,21 +90,36 @@ function JoinFormTemplate() {
         }
 
         if (checkID && checkPW) {
-            setBtnNextDisa(false);
+            setBtnNextDis(false);
         }
     };
 
     /**
      * 다음 프로세스 이동
      */
-    const fncGoNextProc = (e) => {
-        if (e.target.title === "다음") {
+    const fncGoNextProc = () => {
+        if (firstProc && !secondProc) {
             setFirstProc(false);
             setSecondProc(true);
         } else {
-            alert(">>> 본인인증하고 가입완료하기 버튼 클릭 <<<");
+            fncSendJoin();
         }
     };
+
+    /**
+     * 회원가입 API 호출
+     */
+    const fncSendJoin = async() => {
+        console.log(">>> fncSendJoin 함수 진입 <<<");  
+        axios.post("/api/v1/member", {
+            username: 'test@test.com',
+            password: 'testPassword!',
+        }).catch((error) => { // 오류 발생 시 실행
+            console.log(">>> error : " + error + " <<<");            
+        }).then((response) => { // 항상 실행
+            console.log(">>> response : " + response + " <<<");
+        });
+    }
 
     return (
         <MainTemplate>
@@ -124,7 +136,7 @@ function JoinFormTemplate() {
                             <div className="input_box">
                                 <input placeholder="비밀번호 입력" autoCapitalize="none" type="password" name="password" defaultValue={""} maxLength={20} onChange={fncChkVal} />
                             </div>
-                            <BtnDefault className="btn_join" title="다음" onClick={fncGoNextProc} disabled={btnNextDisa} />
+                            <BtnDefault className="btn_join" title="다음" onClick={fncGoNextProc} disabled={btnNextDis} />
                         </form>
                     </div>
                 ) : (
