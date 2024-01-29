@@ -26,7 +26,7 @@ const BtnDefaultBlock = styled.button`
 
 function BtnDefault(props) {
     return (
-        <BtnDefaultBlock className={props.className} onClick={props.onClick ? props.onClick : null} disabled={props.disabled}>
+        <BtnDefaultBlock className={props.className} onClick={props.onClick ? props.onClick : null} title={props.title} disabled={props.disabled}>
             {props.href ? (
                 <>
                     <a href={props.href}>{props.title}</a>
