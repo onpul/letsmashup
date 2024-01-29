@@ -18,12 +18,22 @@ const BtnDefaultBlock = styled.button`
     font-size: 16px;
     line-height: 56px;
     font-weight: 600;
+    &:disabled {
+        background: rgb(196, 196, 196);
+        color: rgb(255, 255, 255);
+    }
 `;
 
 function BtnDefault(props) {
     return (
         <BtnDefaultBlock className={props.className} onClick={props.onClick ? props.onClick : null} disabled={props.disabled}>
-            {props.href ? <a href={props.href}>{props.title}</a> : props.title}
+            {props.href ? (
+                <>
+                    <a href={props.href}>{props.title}</a>
+                </>
+            ) : (
+                props.title
+            )}
         </BtnDefaultBlock>
     );
 }
