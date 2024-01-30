@@ -1,6 +1,10 @@
+/********************************************************************
+ * @설명 : 로그인 폼
+ ********************************************************************/
+
 import React from "react";
 import styled from "styled-components";
-import logo_sns from "../image/logo_sns.png";
+import logo_sns from "../images/logo_sns.png";
 import MainTemplate from "./MainTemplate";
 import BtnDefault from "./BtnDefault";
 
@@ -167,15 +171,15 @@ const LoginFormBlock = styled.div`
 
 const fncGoLoginKakao = () => {
     alert("카카오톡 로그인은 추후 지원 예정입니다.");
-}
+};
 
 const fncGoLoginNaver = () => {
     alert("카카오톡 로그인은 추후 지원 예정입니다.");
-}
+};
 
 const fncGoLoginFaceBook = () => {
     alert("페이스북 로그인은 추후 지원 예정입니다.");
-}
+};
 
 const fncGoLoginApple = () => {
     alert("Apple 로그인은 추후 지원 예정입니다.");

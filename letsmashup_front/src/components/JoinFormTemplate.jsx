@@ -1,8 +1,13 @@
+/********************************************************************
+ * @설명 : 회원가입 폼
+ ********************************************************************/
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import MainTemplate from "./MainTemplate";
 import BtnDefault from "./BtnDefault";
-import axios from 'axios';
+import axios from "axios";
+import * as commonFunction from "../scripts/commonFunction";
 
 const JoinFormBlock = styled.div`
     padding: 18px 20px 0px;
@@ -62,7 +67,7 @@ function JoinFormTemplate() {
         const regex_id = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         const regex_pw = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#.~_-])[A-Za-z\d@$!%*?&#.~_-]{8,20}$/);
 
-        console.log(">>> sInputVal.name : " + sInputVal.name + " <<<");
+        commonFunction.fncPrintLog("sInputVal.name", sInputVal.name);
         if (sInputVal.name === "userID") {
             // 아이디: 이메일 형태
             // RFC 5322 호환 정규식
@@ -81,11 +86,11 @@ function JoinFormTemplate() {
             // https://byul91oh.tistory.com/624
             if (regex_pw.test(sInputVal.value)) {
                 setCheckPW(true);
-                console.log(">>> sInputVal.value : " + sInputVal.value + " <<<");
-                console.log(">>> PW 입력값 유효성 검사 : " + regex_pw.test(sInputVal.value) + " <<<");
+                commonFunction.fncPrintLog("sInputVal.value", sInputVal.value);
+                commonFunction.fncPrintLog("PW 입력값 유효성 검사", regex_pw.test(sInputVal.value));
             } else {
                 setCheckPW(false);
-                console.log(">>> PW 입력값 유효성 검사 : " + regex_pw.test(sInputVal.value) + " <<<");
+                commonFunction.fncPrintLog("PW 입력값 유효성 검사", regex_pw.test(sInputVal.value));
             }
         }
 
@@ -109,17 +114,22 @@ function JoinFormTemplate() {
     /**
      * 회원가입 API 호출
      */
-    const fncSendJoin = async() => {
-        console.log(">>> fncSendJoin 함수 진입 <<<");  
-        axios.post("/api/v1/member", {
-            username: 'test@test.com',
-            password: 'testPassword!',
-        }).catch((error) => { // 오류 발생 시 실행
-            console.log(">>> error : " + error + " <<<");            
-        }).then((response) => { // 항상 실행
-            console.log(">>> response : " + response + " <<<");
-        });
-    }
+    const fncSendJoin = async () => {
+        commonFunction.fncPrintLog("fncSendJoin 함수 진입");
+        axios
+            .post("/api/v1/member", {
+                username: "test@test.com",
+                password: "testPassword!",
+            })
+            .catch((error) => {
+                // 오류 발생 시 실행
+                commonFunction.fncPrintLog("error", error);
+            })
+            .then((response) => {
+                // 항상 실행
+                commonFunction.fncPrintLog("response", response);
+            });
+    };
 
     return (
         <MainTemplate>

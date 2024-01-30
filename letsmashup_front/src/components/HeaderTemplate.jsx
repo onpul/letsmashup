@@ -1,6 +1,10 @@
+/********************************************************************
+ * @설명 : 공통 헤더
+ ********************************************************************/
+
 import React from "react";
 import styled from "styled-components";
-import mainLogo from "../image/logo_main.png";
+import mainLogo from "../images/logo_main.png";
 
 const HeaderBlock = styled.div`
     width: 100%;
