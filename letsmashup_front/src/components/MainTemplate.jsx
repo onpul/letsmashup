@@ -1,6 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import HeaderTemplate from './HeaderTemplate';
+/********************************************************************
+ * @설명 : 메인 템플릿
+ ********************************************************************/
+
+import React from "react";
+import styled from "styled-components";
+import HeaderTemplate from "./HeaderTemplate";
 
 const MainTemplateBlock = styled.div`
     width: 100%;
@@ -8,7 +12,12 @@ const MainTemplateBlock = styled.div`
 `;
 
 function MainTemplate({ children }) {
-    return <MainTemplateBlock><HeaderTemplate/>{children}</MainTemplateBlock>;
+    return (
+        <MainTemplateBlock>
+            <HeaderTemplate />
+            {children}
+        </MainTemplateBlock>
+    );
 }
 
 export default MainTemplate;

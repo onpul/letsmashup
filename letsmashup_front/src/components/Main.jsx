@@ -1,8 +1,13 @@
+/********************************************************************
+ * @설명 : 임시 메인
+ ********************************************************************/
+
 import React, { useState } from "react";
 import MainTemplate from "./MainTemplate";
 import styled from "styled-components";
 import BtnDefault from "./BtnDefault";
 import axios from "axios";
+import * as commonFunction from "../scripts/commonFunction";
 
 const MainBlock = styled.div`
     padding: 18px 20px 0px;
@@ -36,28 +41,28 @@ const MainBlock = styled.div`
 `;
 
 function Main() {
-
     const [url, setUrl] = useState("");
     const [response, setResponse] = useState("");
     const [error, setError] = useState("");
 
     const fncSendApi = (e) => {
+        commonFunction.fncCallAPI();
         const sURL = e.target.title;
-        // console.log(">>> sURL : " + sURL + " <<<");
         setUrl(sURL);
-        axios.post(sURL, {
-            username: "test@test.com",
-            password: "testPassword!",
-        }).catch((error) => {
-            // 오류 발생 시 실행
-            setError(error + " ");
-            // console.log(">>> error : " + error + " <<<");
-        }).then((response) => {
-            // 항상 실행
-            setResponse(response + " ");
-            // console.log(">>> response : " + response + " <<<");
-        });
-    }
+        axios
+            .post(sURL, {
+                username: "test@test.com",
+                password: "testPassword!",
+            })
+            .catch((error) => {
+                // 오류 발생 시 실행
+                setError(error + " ");
+            })
+            .then((response) => {
+                // 항상 실행
+                setResponse(response + " ");
+            });
+    };
     return (
         <MainTemplate>
             <MainBlock>

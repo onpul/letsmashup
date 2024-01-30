@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
     }
   body {
     background: #FFFFFF;
-    font-family: 'campton','Apple SD Gothic Neo', 'NanumBarunGothic', '나눔바른고딕', 'Malgun Gothic', '맑은 고딕', 'dotum', 'sans-serif';
+    font-family: 'campton', 'Apple SD Gothic Neo', 'NanumBarunGothic', '나눔바른고딕', 'Malgun Gothic', '맑은 고딕', 'dotum', 'sans-serif';
   }
 `;
 
