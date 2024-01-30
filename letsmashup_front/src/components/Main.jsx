@@ -37,23 +37,25 @@ const MainBlock = styled.div`
 
 function Main() {
 
-    const [message, setMessage] = useState("");
+    const [url, setUrl] = useState("");
+    const [response, setResponse] = useState("");
     const [error, setError] = useState("");
 
     const fncSendApi = (e) => {
         const sURL = e.target.title;
-        console.log(">>> sURL : " + sURL + " <<<");
+        // console.log(">>> sURL : " + sURL + " <<<");
+        setUrl(sURL);
         axios.post(sURL, {
             username: "test@test.com",
             password: "testPassword!",
         }).catch((error) => {
             // 오류 발생 시 실행
             setError(error + " ");
-            console.log(">>> error : " + error + " <<<");
+            // console.log(">>> error : " + error + " <<<");
         }).then((response) => {
             // 항상 실행
-            setMessage(response + " ");
-            console.log(">>> response : " + response + " <<<");
+            setResponse(response + " ");
+            // console.log(">>> response : " + response + " <<<");
         });
     }
     return (
@@ -67,15 +69,15 @@ function Main() {
                     <hr />
                     <br />
                     <h1>▶️ API 호출 테스트 ◀️</h1>
-                    <h3>회원가입 POST</h3>
+                    <h3>회원가입 (POST)</h3>
                     <BtnDefault title="/api/v1/member" onClick={fncSendApi} />
-                    <h3>로그인 POST</h3>
+                    <h3>로그인 (POST)</h3>
                     <BtnDefault title="/api/v1/memberLogin" onClick={fncSendApi} />
-                    <h3>로그아웃 PUT</h3>
+                    <h3>로그아웃 (PUT)</h3>
                     <BtnDefault title="/api/v1/memberLogout" onClick={fncSendApi} />
-                    <h3>아이디찾기 GET</h3>
+                    <h3>아이디찾기 (GET)</h3>
                     <BtnDefault title="/api/v1/memberIdFind" onClick={fncSendApi} />
-                    <h3>비밀번호찾기 GET</h3>
+                    <h3>비밀번호찾기 (GET)</h3>
                     <BtnDefault title="/api/v1/memberPassFind" onClick={fncSendApi} />
                     <br />
                     <hr />
@@ -83,15 +85,19 @@ function Main() {
                     <h1>▶️ API 호출 정보 ◀️</h1>
                     <div className="apiInfo">
                         <div className="apiRes">
-                            <b>error 결과 :</b>
+                            <b>url :</b>
+                        </div>
+                        <span>{url}</span>
+                        <div className="apiRes">
+                            <b>error :</b>
                         </div>
                         <span>{error}</span>
                         <div className="apiRes">
-                            <b>message 결과 :</b>
+                            <b>response :</b>
                         </div>
-                        <span>{message}</span>
+                        <span>{response}</span>
                     </div>
-                    <hr/>
+                    <hr />
                 </div>
             </MainBlock>
         </MainTemplate>
