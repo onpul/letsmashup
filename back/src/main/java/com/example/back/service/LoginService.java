@@ -14,7 +14,7 @@ public class LoginService {
     private final MemberRepository memberRepository;
 
     public ResponseMember memberLogin(RequestLogin requestLogin){
-        MemberEntity memberEntity = memberRepository.findByMemberIdAndPassWord(requestLogin.getMemberId(), requestLogin.getMemberId())
+        MemberEntity memberEntity = memberRepository.findByMemberIdAndPassWord(requestLogin.getMemberId(), requestLogin.getPassWord())
                 .orElseThrow(() -> new RuntimeException("일치하는 회원 없음"));
         return memberEntity.toResponse();
     }
