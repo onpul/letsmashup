@@ -9,7 +9,15 @@ https://mjchoi-atwork.atlassian.net/wiki/spaces/L/pages/1769534
 
 ---
 
-# TODO:
-- 회원가입 인풋 조건 유효성 체크 로직 추가
-- 본인인증 페이지 구현 및 임시 로직 적용
-- API 호출
+# TIL
+
+### 20240201
+1) setState 바로 업뎃 안 되는 이슈
+if (regex_pw.test(sInputVal.value)) {
+    setCheckPW(true);
+    commonFunction.fncPrintLog("sInputVal.value", sInputPW);
+} else {
+    setCheckPW(false);
+}
+- 인풋값 유효성 검사해서 버튼 disabled 처리하려고 했는데, 유효성 검사 만족 후에도 상태값이 한 번 더 바뀐 후에야(인풋 한번 더 입력-onchange) 업뎃되는 거 확인...
+- state 는 비동기 동작임
