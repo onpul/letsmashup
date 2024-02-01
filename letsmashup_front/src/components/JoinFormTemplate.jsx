@@ -2,7 +2,7 @@
  * @설명 : 회원가입 폼
  ********************************************************************/
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import MainTemplate from "./MainTemplate";
 import BtnDefault from "./BtnDefault";
@@ -52,50 +52,38 @@ const JoinFormBlock = styled.div`
 `;
 
 function JoinFormTemplate() {
-    const [checkID, setCheckID] = useState(false);
-    const [checkPW, setCheckPW] = useState(false);
     const [firstProc, setFirstProc] = useState(true);
     const [secondProc, setSecondProc] = useState(false);
     const [btnNextDis, setBtnNextDis] = useState(true);
 
+    const inputIdRef = useRef();
+    const inputPWRef = useRef();
+
     /**
      * 입력 값 유효성 체크
      */
-    const fncChkVal = (e) => {
-        const sInputVal = e.target;
+    const fncChkVal = () => {
+        // 아이디: 이메일 형태
+        // 비밀번호: 대소문자, 숫자, 특수문자, 8-20자 이내
         // eslint-disable-next-line
         const regex_id = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         const regex_pw = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#.~_-])[A-Za-z\d@$!%*?&#.~_-]{8,20}$/);
 
-        commonFunction.fncPrintLog("sInputVal.name", sInputVal.name);
-        if (sInputVal.name === "userID") {
-            // 아이디: 이메일 형태
-            // RFC 5322 호환 정규식
-            // https://webcache.googleusercontent.com/search?q=cache:514Y4NDdl6sJ:https://emailregex.com/+&cd=1&hl=ko&ct=clnk&gl=kr
+        let chkID = false;
+        let chkPW = false;
 
-            if (regex_id.test(sInputVal.value)) {
-                setCheckID(true);
-                // console.log(">>> sInputVal.value : " + sInputVal.value + " <<<");
-                // console.log(">>> ID 입력값 유효성 검사 : " + regex_id.test(sInputVal.value) + " <<<");
-            } else {
-                setCheckID(false);
-                // console.log(">>> ID 입력값 유효성 검사 : " + regex_id.test(sInputVal.value) + " <<<");
-            }
-        } else if (sInputVal.name === "password") {
-            // 비밀번호: 대소문자, 숫자, 특수문자, 8-20자 이내
-            // https://byul91oh.tistory.com/624
-            if (regex_pw.test(sInputVal.value)) {
-                setCheckPW(true);
-                commonFunction.fncPrintLog("sInputVal.value", sInputVal.value);
-                commonFunction.fncPrintLog("PW 입력값 유효성 검사", regex_pw.test(sInputVal.value));
-            } else {
-                setCheckPW(false);
-                commonFunction.fncPrintLog("PW 입력값 유효성 검사", regex_pw.test(sInputVal.value));
-            }
-        }
+        regex_id.test(inputIdRef.current.value) === true ? (chkID = true) : (chkID = false);
+        regex_pw.test(inputPWRef.current.value) === true ? (chkPW = true) : (chkPW = false);
 
-        if (checkID && checkPW) {
+        // 값 확인용 콘솔 로그
+        commonFunction.fncPrintLog("inputIdRef.current / chkID", String(inputIdRef.current.value) + String(chkID));
+        commonFunction.fncPrintLog("inputPWRef.current / chkPW", String(inputPWRef.current.value) + String(chkPW));
+
+        // 버튼 disabled 처리
+        if (chkID && chkPW) {
             setBtnNextDis(false);
+        } else {
+            setBtnNextDis(true);
         }
     };
 
@@ -104,8 +92,8 @@ function JoinFormTemplate() {
      */
     const fncGoNextProc = () => {
         if (firstProc && !secondProc) {
-            setFirstProc(false);
-            setSecondProc(true);
+            setFirstProc(false); // 입력 폼 숨김
+            setSecondProc(true); // 본인인증 버튼 노출
         } else {
             fncSendJoin();
         }
@@ -115,20 +103,7 @@ function JoinFormTemplate() {
      * 회원가입 API 호출
      */
     const fncSendJoin = async () => {
-        commonFunction.fncPrintLog("fncSendJoin 함수 진입");
-        axios
-            .post("/api/v1/member", {
-                username: "test@test.com",
-                password: "testPassword!",
-            })
-            .catch((error) => {
-                // 오류 발생 시 실행
-                commonFunction.fncPrintLog("error", error);
-            })
-            .then((response) => {
-                // 항상 실행
-                commonFunction.fncPrintLog("response", response);
-            });
+        alert("Nice 본인인증 API 구현 예정임 ^.^");
     };
 
     return (
@@ -140,11 +115,11 @@ function JoinFormTemplate() {
                         <form>
                             <h3 className="form_notice_txt">로그인에 사용할 아이디를 입력해주세요.</h3>
                             <div className="input_box">
-                                <input placeholder="아이디 (이메일) 입력" autoCapitalize="none" type="text" name="userID" defaultValue={""} onChange={fncChkVal} />
+                                <input placeholder="아이디 (이메일) 입력" autoCapitalize="none" type="text" name="userID" defaultValue={""} ref={inputIdRef} onChange={fncChkVal} />
                             </div>
                             <h3 className="form_notice_txt">로그인에 사용할 비밀번호를 입력해주세요.</h3>
                             <div className="input_box">
-                                <input placeholder="비밀번호 입력" autoCapitalize="none" type="password" name="password" defaultValue={""} maxLength={20} onChange={fncChkVal} />
+                                <input placeholder="비밀번호 입력" autoCapitalize="none" type="password" name="password" defaultValue={""} maxLength={20} ref={inputPWRef} onChange={fncChkVal} />
                             </div>
                             <BtnDefault className="btn_join" title="다음" onClick={fncGoNextProc} disabled={btnNextDis} />
                         </form>
