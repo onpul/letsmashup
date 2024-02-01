@@ -169,18 +169,38 @@ const LoginFormBlock = styled.div`
     }
 `;
 
+
+/**
+ * 카카오톡 연동 로그인
+ * 참고) https://stack94.tistory.com/entry/React-%EC%B9%B4%EC%B9%B4%EC%98%A4Kakao-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EA%B8%B0#REST%20API%20%EB%B0%A9%EC%8B%9D-1
+ */
 const fncGoLoginKakao = () => {
-    alert("카카오톡 로그인은 추후 지원 예정입니다.");
+    // alert("카카오톡 로그인은 추후 지원 예정입니다.");
+    const Rest_api_key = "c20f3743bb55af6db68df98d30729295"; // REST API KEY
+    const redirect_uri = "http://localhost:3000/auth"; // Redirect URI
+
+    // oauth 요청 URL
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
+    window.location.href = kakaoURL;
 };
 
+/**
+ * 네이버 연동 로그인
+ */
 const fncGoLoginNaver = () => {
     alert("카카오톡 로그인은 추후 지원 예정입니다.");
 };
 
+/**
+ * 페이스북 연동 로그인
+ */
 const fncGoLoginFaceBook = () => {
     alert("페이스북 로그인은 추후 지원 예정입니다.");
 };
 
+/**
+ * APPLE 연동 로그인
+ */
 const fncGoLoginApple = () => {
     alert("Apple 로그인은 추후 지원 예정입니다.");
 };

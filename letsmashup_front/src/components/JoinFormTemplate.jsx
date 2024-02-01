@@ -62,7 +62,7 @@ function JoinFormTemplate() {
     /**
      * 입력 값 유효성 체크
      */
-    const fncChkVal = (e) => {
+    const fncChkVal = () => {
         // 아이디: 이메일 형태
         // 비밀번호: 대소문자, 숫자, 특수문자, 8-20자 이내
         // eslint-disable-next-line
@@ -75,9 +75,11 @@ function JoinFormTemplate() {
         regex_id.test(inputIdRef.current.value) === true ? (chkID = true) : (chkID = false);
         regex_pw.test(inputPWRef.current.value) === true ? (chkPW = true) : (chkPW = false);
 
+        // 값 확인용 콘솔 로그
         commonFunction.fncPrintLog("inputIdRef.current / chkID", String(inputIdRef.current.value) + String(chkID));
         commonFunction.fncPrintLog("inputPWRef.current / chkPW", String(inputPWRef.current.value) + String(chkPW));
 
+        // 버튼 disabled 처리
         if (chkID && chkPW) {
             setBtnNextDis(false);
         } else {
@@ -90,8 +92,8 @@ function JoinFormTemplate() {
      */
     const fncGoNextProc = () => {
         if (firstProc && !secondProc) {
-            setFirstProc(false);
-            setSecondProc(true);
+            setFirstProc(false); // 입력 폼 숨김
+            setSecondProc(true); // 본인인증 버튼 노출
         } else {
             fncSendJoin();
         }
@@ -101,20 +103,7 @@ function JoinFormTemplate() {
      * 회원가입 API 호출
      */
     const fncSendJoin = async () => {
-        commonFunction.fncPrintLog("fncSendJoin 함수 진입");
-        axios
-            .post("/api/v1/member", {
-                username: "test@test.com",
-                password: "testPassword!",
-            })
-            .catch((error) => {
-                // 오류 발생 시 실행
-                commonFunction.fncPrintLog("error", error);
-            })
-            .then((response) => {
-                // 항상 실행
-                commonFunction.fncPrintLog("response", response);
-            });
+        alert("Nice 본인인증 API 구현 예정임 ^.^");
     };
 
     return (
