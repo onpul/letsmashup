@@ -2,7 +2,7 @@
  * @설명 : 로그인 폼
  ********************************************************************/
 
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import logo_sns from "../images/logo_sns.png";
 import MainTemplate from "./MainTemplate";
@@ -175,22 +175,41 @@ const LoginFormBlock = styled.div`
  * 참고) https://stack94.tistory.com/entry/React-%EC%B9%B4%EC%B9%B4%EC%98%A4Kakao-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EA%B8%B0#REST%20API%20%EB%B0%A9%EC%8B%9D-1
  */
 const fncGoLoginKakao = () => {
-    // alert("카카오톡 로그인은 추후 지원 예정입니다.");
-    const Rest_api_key = "c20f3743bb55af6db68df98d30729295"; // REST API KEY
-    const redirect_uri = "http://localhost:3000/auth"; // Redirect URI
+    const REST_API_KEY = "c20f3743bb55af6db68df98d30729295"; // REST API KEY
+    const REDIRECT_URI = "http://localhost:3000/auth"; // Redirect URI
 
     // oauth 요청 URL
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
-    window.location.href = kakaoURL;
+    const KakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    window.location.href = KakaoURL;
 };
 
 /**
  * 네이버 연동 로그인
+ * 참고) 
+ * https://velog.io/@koyk0408/React-%EB%84%A4%EC%9D%B4%EB%B2%84%EB%A1%9C%EA%B7%B8%EC%9D%B8
+ * https://velog.io/@rxxdo/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-1%EB%B6%80
  */
-const fncGoLoginNaver = () => {
-    alert("카카오톡 로그인은 추후 지원 예정입니다.");
+const initializeNaverLogin = () => {
+    const NAVER_CLITED_ID = "eMYmL8alvmW2xqQZjhTw"; 
+    const NAVER_CALLBACK_URL = "http://localhost:3000/auth";
+    const naverLogin = new window.naver.LoginWithNaverId({
+        clientId: NAVER_CLITED_ID, // CALLBACK_URL
+        callbackUrl: NAVER_CALLBACK_URL, // Redirect URI
+        isPopup: false,
+        loginButton: { color: "green", type: 1, height: 60 },
+        callbackHandle: true,
+    });
+    naverLogin.init();
 };
 
+/**
+ * 네이버 로그인 API
+ * - 버튼 스타일 커스텀 위해, 클릭 이벤트 따로 호출
+ */
+const fncGoLoginNaver = () => {
+    document.getElementById("naverIdLogin_loginButton").click();
+}
+ 
 /**
  * 페이스북 연동 로그인
  */
@@ -206,6 +225,10 @@ const fncGoLoginApple = () => {
 };
 
 function LoginFormTemplate() {
+    useEffect(() => {
+        initializeNaverLogin();
+    }, []);
+
     return (
         <MainTemplate>
             <LoginFormBlock>
@@ -236,6 +259,7 @@ function LoginFormTemplate() {
                                 <button className="btn_login_naver">
                                     <span className="btntxt">네이버로 로그인하기</span>
                                 </button>
+                                <div id="naverIdLogin" style={{display:"none"}}></div>
                             </div>
                             <div className="btn_facebook_div btn_icon" onClick={fncGoLoginFaceBook}>
                                 <button className="btn_login_facebook">
