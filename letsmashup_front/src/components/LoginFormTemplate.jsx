@@ -169,7 +169,6 @@ const LoginFormBlock = styled.div`
     }
 `;
 
-
 /**
  * 카카오톡 연동 로그인
  * 참고) https://stack94.tistory.com/entry/React-%EC%B9%B4%EC%B9%B4%EC%98%A4Kakao-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EA%B8%B0#REST%20API%20%EB%B0%A9%EC%8B%9D-1
@@ -255,18 +254,18 @@ function LoginFormTemplate() {
                                     <span className="btn_kakao_txt2 btntxt">카카오로 로그인하기</span>
                                 </button>
                             </div>
-                            <div className="btn_naver_div btn_icon" onClick={fncGoLoginNaver}>
+                            <div className="btn_naver_div" onClick={fncGoLoginNaver}>
                                 <button className="btn_login_naver">
                                     <span className="btntxt">네이버로 로그인하기</span>
                                 </button>
                                 <div id="naverIdLogin" style={{display:"none"}}></div>
                             </div>
-                            <div className="btn_facebook_div btn_icon" onClick={fncGoLoginFaceBook}>
+                            <div className="btn_facebook_div" onClick={fncGoLoginFaceBook}>
                                 <button className="btn_login_facebook">
                                     <span className="btntxt">페이스북으로 로그인하기</span>
                                 </button>
                             </div>
-                            <div className="btn_apple_div btn_icon" onClick={fncGoLoginApple}>
+                            <div className="btn_apple_div" onClick={fncGoLoginApple}>
                                 <button className="btn_login_apple">
                                     <span className="btntxt">Apple로 로그인하기</span>
                                 </button>
