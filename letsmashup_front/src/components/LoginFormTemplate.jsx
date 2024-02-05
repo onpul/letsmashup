@@ -2,7 +2,7 @@
  * @설명 : 로그인 폼
  ********************************************************************/
 
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import logo_sns from "../images/logo_sns.png";
 import MainTemplate from "./MainTemplate";
@@ -189,7 +189,7 @@ const fncGoLoginKakao = () => {
  * https://velog.io/@koyk0408/React-%EB%84%A4%EC%9D%B4%EB%B2%84%EB%A1%9C%EA%B7%B8%EC%9D%B8
  * https://velog.io/@rxxdo/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%86%8C%EC%85%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-1%EB%B6%80
  */
-const fncGoLoginNaver = () => {
+const initializeNaverLogin = () => {
     const NAVER_CLITED_ID = "eMYmL8alvmW2xqQZjhTw"; 
     const NAVER_CALLBACK_URL = "http://localhost:3000/auth";
     const naverLogin = new window.naver.LoginWithNaverId({
@@ -199,11 +199,16 @@ const fncGoLoginNaver = () => {
         loginButton: { color: "green", type: 1, height: 60 },
         callbackHandle: true,
     });
-    debugger;
     naverLogin.init();
-
-    document.getElementById("naverIdLogin_loginButton").click();
 };
+
+/**
+ * 네이버 로그인 API
+ * - 버튼 스타일 커스텀 위해, 클릭 이벤트 따로 호출
+ */
+const fncGoLoginNaver = () => {
+    document.getElementById("naverIdLogin_loginButton").click();
+}
  
 /**
  * 페이스북 연동 로그인
@@ -220,6 +225,10 @@ const fncGoLoginApple = () => {
 };
 
 function LoginFormTemplate() {
+    useEffect(() => {
+        initializeNaverLogin();
+    }, []);
+
     return (
         <MainTemplate>
             <LoginFormBlock>
@@ -250,7 +259,7 @@ function LoginFormTemplate() {
                                 <button className="btn_login_naver">
                                     <span className="btntxt">네이버로 로그인하기</span>
                                 </button>
-                                <div id="naverIdLogin" style={{}}></div>
+                                <div id="naverIdLogin" style={{display:"none"}}></div>
                             </div>
                             <div className="btn_facebook_div btn_icon" onClick={fncGoLoginFaceBook}>
                                 <button className="btn_login_facebook">
