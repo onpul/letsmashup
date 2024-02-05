@@ -5,7 +5,7 @@ import JoinFormTemplate from "./components/JoinFormTemplate";
 import LoginFormTemplate from "./components/LoginFormTemplate";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
-import auth from "./components/auth"
+import Auth from "./components/Auth";
 // import MainTemplate from "./components/MainTemplate";
 
 const GlobalStyle = createGlobalStyle`
@@ -74,7 +74,7 @@ function App() {
               <Route path="/" Component={Main} />
               <Route path="/login" Component={LoginFormTemplate} />
               <Route path="/join" Component={JoinFormTemplate} />
-              <Route path="/auth" Component={auth} />
+              <Route path="/Auth" Component={Auth} />
           </Routes>
       </>
   );
