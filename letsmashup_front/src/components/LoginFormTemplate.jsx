@@ -2,7 +2,8 @@
  * @설명 : 로그인 폼
  ********************************************************************/
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import logo_sns from "../images/logo_sns.png";
 import MainTemplate from "./MainTemplate";
@@ -192,8 +193,8 @@ const initializeNaverLogin = () => {
     const NAVER_CLITED_ID = "eMYmL8alvmW2xqQZjhTw"; 
     const NAVER_CALLBACK_URL = "http://localhost:3000/auth";
     const naverLogin = new window.naver.LoginWithNaverId({
-        clientId: NAVER_CLITED_ID, // CALLBACK_URL
-        callbackUrl: NAVER_CALLBACK_URL, // Redirect URI
+        clientId: NAVER_CLITED_ID, // 애플리케이션 등록 시 발급받은 Client ID 값
+        callbackUrl: NAVER_CALLBACK_URL, 
         isPopup: false,
         loginButton: { color: "green", type: 1, height: 60 },
         callbackHandle: true,
@@ -224,6 +225,23 @@ const fncGoLoginApple = () => {
 };
 
 function LoginFormTemplate() {
+    const sInput_ID = useRef();
+    const sInput_PW = useRef();
+
+    const navigate = useNavigate();
+
+    /**
+     * 일반 로그인
+     */
+    const fncGoLogin = () => {
+        if ((sInput_ID.current.value === "guest") && (sInput_PW.current.value === "guest")) {
+            alert("관리자 모드로 로그인 되었습니다.");
+            navigate('/');
+        } else {
+            return;
+        }
+    };
+
     useEffect(() => {
         initializeNaverLogin();
     }, []);
@@ -235,12 +253,12 @@ function LoginFormTemplate() {
                 <div className="form_div">
                     <form>
                         <div className="form_id">
-                            <input placeholder="아이디 (이메일)" autoCapitalize="none" type="text" name="username"></input>
+                            <input placeholder="아이디 (이메일)" autoCapitalize="none" type="text" name="username" ref={sInput_ID}></input>
                         </div>
                         <div className="form_pw">
-                            <input placeholder="비밀번호" autoCapitalize="none" type="password" name="password"></input>
+                            <input placeholder="비밀번호" autoCapitalize="none" type="password" name="password" ref={sInput_PW}></input>
                         </div>
-                        <BtnDefault title="로그인하기" className="btn_login" type="submit" />
+                        <BtnDefault title="로그인하기" className="btn_login" type="submit" onClick={fncGoLogin} />
                     </form>
                     <div className="button_div">
                         <h3>SNS 계정으로 로그인하기</h3>
@@ -258,7 +276,7 @@ function LoginFormTemplate() {
                                 <button className="btn_login_naver">
                                     <span className="btntxt">네이버로 로그인하기</span>
                                 </button>
-                                <div id="naverIdLogin" style={{display:"none"}}></div>
+                                <div id="naverIdLogin" style={{ display: "none" }}></div>
                             </div>
                             <div className="btn_facebook_div" onClick={fncGoLoginFaceBook}>
                                 <button className="btn_login_facebook">
