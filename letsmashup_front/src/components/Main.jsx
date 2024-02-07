@@ -50,7 +50,6 @@ const ItemBlock = styled.div`
         background-color: rgb(255, 255, 255);
 
         .filterBox {
-            width: auto;
             align-items: center;
             display: flex;
             flex-direction: row;
@@ -68,19 +67,43 @@ const ItemBlock = styled.div`
                 justify-content: flex-start;
                 z-index: -1;
                 overflow-x: scroll;
+                padding: 0px 20px;
+            }
 
-                .btn_filter {
-                    border: none;
-                    outline: none;
-                    cursor: pointer;
-                    border-radius: var(--ruler-scale-corner-radius-full);
-                    background-color: rgb(244, 244, 244);
-                    display: flex;
-                    align-items: center;
-                    padding: 6px 12px 6px 14px;
-                    flex-shrink: 0;
+            .btn_filter {
+                margin-right: 6px;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                border-radius: 9999px;
+                background-color: rgb(244, 244, 244);
+                display: flex;
+                align-items: center;
+                padding: 6px 12px 6px 14px;
+                flex-shrink: 0;
+
+                span {
+                    display: inline-block;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: #474747;
+                    margin-right: 6px;
                 }
             }
+        }
+    }
+
+    .prodItemList {
+        display: flex;
+        flex-wrap: wrap;
+
+        .prodItem {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 50%;
+            height: auto;
+            background: lightgray;
+            padding-bottom: 30px;
         }
     }
 `;
@@ -119,33 +142,39 @@ function Main() {
                         <div className="filterBox">
                             <div>
                                 <button className="btn_filter">
-                                    <span>
-                                        최신순
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" color="secondary" className="css-wsam7k ed7xfdk6">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 17.4142L20.7071 8.70711L19.2929 7.2929L12 14.5858L4.70712 7.2929L3.29291 8.70711L12 17.4142Z" fill="black"></path>
-                                        </svg>
-                                    </span>
+                                    <span>최신순</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" color="secondary" className="css-wsam7k ed7xfdk6">
+                                        <path fill-rule="evenodd" clipRule="evenodd" d="M12 17.4142L20.7071 8.70711L19.2929 7.2929L12 14.5858L4.70712 7.2929L3.29291 8.70711L12 17.4142Z" fill="black"></path>
+                                    </svg>
                                 </button>
                                 <button className="btn_filter">
-                                    <span>
-                                        가격대
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" color="secondary" className="css-wsam7k ed7xfdk6">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 17.4142L20.7071 8.70711L19.2929 7.2929L12 14.5858L4.70712 7.2929L3.29291 8.70711L12 17.4142Z" fill="black"></path>
-                                        </svg>
-                                    </span>
+                                    <span>가격대</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" color="secondary" className="css-wsam7k ed7xfdk6">
+                                        <path fill-rule="evenodd" clipRule="evenodd" d="M12 17.4142L20.7071 8.70711L19.2929 7.2929L12 14.5858L4.70712 7.2929L3.29291 8.70711L12 17.4142Z" fill="black"></path>
+                                    </svg>
                                 </button>
                                 <button className="btn_filter">
-                                    <span>
-                                        브랜드
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" color="secondary" className="css-wsam7k ed7xfdk6">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 17.4142L20.7071 8.70711L19.2929 7.2929L12 14.5858L4.70712 7.2929L3.29291 8.70711L12 17.4142Z" fill="black"></path>
-                                        </svg>
-                                    </span>
+                                    <span>브랜드</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" color="secondary" className="css-wsam7k ed7xfdk6">
+                                        <path fill-rule="evenodd" clipRule="evenodd" d="M12 17.4142L20.7071 8.70711L19.2929 7.2929L12 14.5858L4.70712 7.2929L3.29291 8.70711L12 17.4142Z" fill="black"></path>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div>상품 리스트 영역</div>
+                    {/* 상품 리스트 영역 */}
+                    <div>
+                        <ul className="prodItemList">
+                            <li className="prodItem">상품 아이템</li>
+                            <li className="prodItem">상품 아이템</li>
+                            <li className="prodItem">상품 아이템</li>
+                            <li className="prodItem">상품 아이템</li>
+                            <li className="prodItem">상품 아이템</li>
+                            <li className="prodItem">상품 아이템</li>
+                            <li className="prodItem">상품 아이템</li>
+                            <li className="prodItem">상품 아이템</li>
+                        </ul>
+                    </div>
                 </ItemBlock>
             </MainBlock>
         </MainTemplate>
