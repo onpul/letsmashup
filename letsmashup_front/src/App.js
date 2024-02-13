@@ -5,6 +5,8 @@ import JoinFormTemplate from "./components/JoinFormTemplate";
 import LoginFormTemplate from "./components/LoginFormTemplate";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
+import Auth from "./components/Auth";
+import TestMain from "./components/TestMain"
 // import MainTemplate from "./components/MainTemplate";
 
 const GlobalStyle = createGlobalStyle`
@@ -59,9 +61,15 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         color: #ffffff;
     }
+  html, body {
+    height: 100%;
+  }
   body {
     background: #FFFFFF;
     font-family: 'campton', 'Apple SD Gothic Neo', 'NanumBarunGothic', '나눔바른고딕', 'Malgun Gothic', '맑은 고딕', 'dotum', 'sans-serif';
+  }
+  div#root {
+    height: 100%;
   }
 `;
 
@@ -71,8 +79,10 @@ function App() {
           <GlobalStyle />
           <Routes>
               <Route path="/" Component={Main} />
+              <Route path="/testMain" Component={TestMain} />
               <Route path="/login" Component={LoginFormTemplate} />
               <Route path="/join" Component={JoinFormTemplate} />
+              <Route path="/Auth" Component={Auth} />
           </Routes>
       </>
   );

@@ -103,7 +103,8 @@ function JoinFormTemplate() {
      * 회원가입 API 호출
      */
     const fncSendJoin = async () => {
-        alert("Nice 본인인증 API 구현 예정임 ^.^");
+        alert("Nice 본인인증 API 구현 예정");
+        axios(); // TODO: 구현 중
     };
 
     return (
