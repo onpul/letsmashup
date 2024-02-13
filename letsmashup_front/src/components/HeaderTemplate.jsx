@@ -7,9 +7,11 @@ import styled from "styled-components";
 import mainLogo from "../images/logo_main.png";
 
 const HeaderBlock = styled.div`
+    box-sizing: border-box;
     width: 100%;
     height: 50px;
     position: relative;
+    z-index: 1;
 `;
 
 const LogoBlock = styled.div`
@@ -25,15 +27,13 @@ const LogoBlock = styled.div`
 
 function HeaderTemplate() {
     return (
-        <div>
-            <HeaderBlock>
+            <HeaderBlock className="headerBox">
                 <LogoBlock>
                     <a href="/">
                         <img src={mainLogo} className="main_logo" alt="mainLogo"></img>
                     </a>
                 </LogoBlock>
             </HeaderBlock>
-        </div>
     );
 }
 

@@ -9,7 +9,9 @@ import styled from "styled-components";
 const MainBlock = styled.div`
     position: relative;
     box-sizing: border-box;
-    padding-bottom: 68px; // 하단 소개 영역
+    height: 100%;
+    margin: -50px 0 -200px;
+    padding: 50px 0 200px 0;
 `;
 
 const MenuBlock = styled.div`
@@ -66,7 +68,6 @@ const ItemBlock = styled.div`
                 flex-direction: row;
                 justify-content: flex-start;
                 z-index: -1;
-                overflow-x: scroll;
                 padding: 0px 20px;
             }
 
@@ -111,7 +112,7 @@ const ItemBlock = styled.div`
 function Main() {
     return (
         <MainTemplate>
-            <MainBlock>
+            <MainBlock className="mainContentsBox">
                 {/* 전체 메뉴 영역 */}
                 <MenuBlock>
                     <ul className="menuListBox">
