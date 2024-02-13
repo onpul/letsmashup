@@ -9,7 +9,7 @@ import * as commonFunction from "../scripts/commonFunction";
 
 const AuthBlock = styled.div`
     width: auto;
-    padding: 18px 20px 0px;
+    padding: 18px 20px 0px;  
     border-top: 2px solid rgb(244, 244, 244);
     position: relative;
     flex: 1 0 100%;
