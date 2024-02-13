@@ -63,6 +63,17 @@ function Main() {
                 setResponse(response + " ");
             });
     };
+    
+    // const fncGet29Data = () => {
+    //     axios.get().then((response) => {
+    //         debugger;
+    //         console.log(response);
+    //     }).catch((error) => {
+    //         debugger;
+    //         console.log(error);
+    //     });
+    // };
+
     return (
         <MainTemplate>
             <MainBlock>
@@ -84,6 +95,12 @@ function Main() {
                     <BtnDefault title="/api/v1/memberIdFind" onClick={fncSendApi} />
                     <h3>비밀번호찾기 (GET)</h3>
                     <BtnDefault title="/api/v1/memberPassFind" onClick={fncSendApi} />
+                    <br />
+                    <hr />
+                    <br />
+                    <h1>▶️ 기타 테스트 ◀️</h1>
+                    <h3>크롤링</h3>
+                    <BtnDefault title="크롤링"/>
                     <br />
                     <hr />
                     <br />
