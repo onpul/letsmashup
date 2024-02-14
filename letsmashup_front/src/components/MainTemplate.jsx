@@ -5,7 +5,7 @@
 import React from "react";
 import styled from "styled-components";
 import HeaderTemplate from "./HeaderTemplate";
-// import FooterTemplate from "./FooterTemplate";
+import FooterTemplate from "./FooterTemplate";
 
 const MainTemplateBlock = styled.div`
     width: 100%;
@@ -17,7 +17,7 @@ function MainTemplate({ children }) {
         <MainTemplateBlock className="mainBox">
             <HeaderTemplate />
                 {children}
-            {/* <FooterTemplate /> */}
+            <FooterTemplate />
         </MainTemplateBlock>
     );
 }
