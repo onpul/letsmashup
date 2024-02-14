@@ -22,17 +22,17 @@ const FooterBlock = styled.div`
         font-weight: 500;
         font-size: 16px;
         color: #ffffff;
+        border-bottom: 1px solid #333232;
     }
 
     .link {
         overflow: hidden;
         padding-top: 17px;
-        border-top: 1px solid #333232;
+    }
 
-        a {
-            font-weight: 400;
-            color: #9b9b9b;
-        }
+    a {
+        font-weight: 400;
+        color: #9b9b9b;
     }
 `;
 
@@ -40,6 +40,7 @@ function HeaderTemplate() {
     return (
         <FooterBlock className="footerBox">
             <div className="title">29CM 클론 프로젝트 - 리액트 구현</div>
+            <div className="link"><a href="/">🔗 메인으로 이동</a></div>
             <div className="link"><a href="/testMain">🔗 테스트 페이지로 이동</a></div>
         </FooterBlock>
     );

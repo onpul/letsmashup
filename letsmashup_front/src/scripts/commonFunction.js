@@ -6,16 +6,17 @@
 import axios from "axios";
 
 // API 호출 함수
-export let fncCallAPI = (sURL, inParam) => {
-    // get
-    axios
-        .get(sURL)
-        .then((Response) => {
-
-        })
-        .catch((Error) => {
-
-        });
+export let fncCallAPI = (method, sURL, sCallback, fCallback, inParam) => {
+    if (method === "get") {
+        axios
+            .get(sURL)
+            .then((response) => {
+                sCallback(response);
+            })
+            .catch((error) => {
+                fCallback(error);
+            });
+    }
 };
 
 // 콘솔 로그 함수
