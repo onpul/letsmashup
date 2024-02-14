@@ -209,7 +209,7 @@ function Main() {
                                                 <div className="itemInfoBox">
                                                     <div style={{ marginBottom: "4px", color: "#000", fontSize: "12px", fontWeight: "700" }}>브랜드명</div>
                                                     <div style={{ marginBottom: "5px", color: "#5d5d5d", wordBreak: "break-all", fontSize: "12px" }}>{item.title}</div>
-                                                    <div style={{ color: "#303033", lineHeight: "18px", display:"flex"}}>
+                                                    <div style={{ color: "#303033", lineHeight: "18px", display:"flex" }}>
                                                         <span style={{ fontSize: "16px", fontWeight: "700", marginRight: "2px" }}>999,999</span>
                                                         <span style={{ fontSize: "11px" }}>원</span>
                                                     </div>
