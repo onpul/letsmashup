@@ -16,6 +16,7 @@ const MainBlock = styled.div`
     flex: 1 0 100%;
     text-align: center;
     margin-bottom: 60px;
+    box-sizing: border-box;
 
     h1 {
         font-weight: 700;

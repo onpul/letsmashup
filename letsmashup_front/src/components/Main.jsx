@@ -2,14 +2,16 @@
  * @설명 : 상품 메인
  ********************************************************************/
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainTemplate from "./MainTemplate";
 import styled from "styled-components";
+import * as commonFunction from "../scripts/commonFunction";
 
 const MainBlock = styled.div`
     position: relative;
     box-sizing: border-box;
-    padding-bottom: 68px; // 하단 소개 영역
+    margin: -50px 0 -200px;
+    padding: 50px 0 200px 0;
 `;
 
 const MenuBlock = styled.div`
@@ -66,7 +68,6 @@ const ItemBlock = styled.div`
                 flex-direction: row;
                 justify-content: flex-start;
                 z-index: -1;
-                overflow-x: scroll;
                 padding: 0px 20px;
             }
 
@@ -96,22 +97,54 @@ const ItemBlock = styled.div`
     .prodItemList {
         display: flex;
         flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+        align-items: flex-start;
 
         .prodItem {
+            flex-basis: 150px;
+            flex-grow: 1;
             display: inline-block;
             box-sizing: border-box;
-            width: 50%;
-            height: auto;
-            background: lightgray;
+            max-width: 100%;
+            min-height: 1px;
+            padding: 0 0 25px;
             padding-bottom: 30px;
+            text-align: left;
+
+            img {
+                width: 100%;
+            }
+        }
+        
+        .itemInfoBox {
+            margin: 14px 12px 0;
         }
     }
 `;
 
 function Main() {
+
+    const [imageData, setImageData] = useState(null);
+
+    useEffect(() => {
+        commonFunction.fncCallAPI(
+            "get",
+            "https://jsonplaceholder.typicode.com/photos?albumId=1",
+            (response) => {
+                console.log(response);
+                let data = response.data;
+                setImageData(data);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }, []);
+    
     return (
         <MainTemplate>
-            <MainBlock>
+            <MainBlock className="mainContentsBox">
                 {/* 전체 메뉴 영역 */}
                 <MenuBlock>
                     <ul className="menuListBox">
@@ -165,69 +198,36 @@ function Main() {
                     {/* 상품 리스트 영역 */}
                     <div>
                         <ul className="prodItemList">
-                            {/* 
-                            <li className="prodItem">
-                                <div className="css-jwhhfi e4ed4ur0">
-                                    <a href="https://product.29cm.co.kr/catalog/1674338" title="ESSENTIAL 2 BUTTON WOOL BLAZER BLACK_UDJA4A202BK" className="css-5cm1aq e4ed4ur1">
-                                        <div className="css-8wyujp e4ed4ur10">
-                                            <img src="https://img.29cm.co.kr/item/202402/11eec0c78831e47cb238a9c44bc2cb7a.jpg?width=400" alt="ESSENTIAL 2 BUTTON WOOL BLAZER BLACK_UDJA4A202BK" />
-                                        </div>
-                                    </a>
-                                    <div className="css-1drk60u e4ed4ur3">
-                                        <a href="https://shop.29cm.co.kr/brand/13310" title="던스트" className="css-r28l8o e4ed4ur4">
-                                            던스트
-                                        </a>
-                                        <a href="https://product.29cm.co.kr/catalog/1674338" title="ESSENTIAL 2 BUTTON WOOL BLAZER BLACK_UDJA4A202BK" className="css-5cm1aq e4ed4ur1">
-                                            <div className="css-1slcl62 e4ed4ur2">
-                                                <h5 id="product_name_13">ESSENTIAL 2 BUTTON WOOL BLAZER BLACK_UDJA4A202BK</h5>
-                                                <div className="css-qthr7l e4ed4ur5">
-                                                    <strong id="product_price_13_consumer" className="css-vpz6w1 e4ed4ur6">
-                                                        239,000
-                                                    </strong>
-                                                    <div className="css-19cy31c e4ed4ur7">
-                                                        <span className=" css-1nr17il e4ed4ur8">12%</span>
-                                                        <strong id="product_price_13_sale" className="css-s9qxfl e4ed4ur9">
-                                                            210,320
-                                                        </strong>
+                            {/*
+                                albumId : 1
+                                id : 1
+                                thumbnailUrl : "https://via.placeholder.com/150/92c952"
+                                title : "accusamus beatae ad facilis cum similique qui sunt"
+                                url : "https://via.placeholder.com/600/92c952" 
+                            */}
+                            {imageData ? (
+                                imageData.map((item, index) => {
+                                    return (
+                                        <li className="prodItem" key={item.id}>
+                                            <div>
+                                                <div className="itemImgBox">
+                                                    <img src={item.thumbnailUrl} alt={item.title} />
+                                                </div>
+                                                <div className="itemInfoBox">
+                                                    <div style={{ marginBottom: "4px", color: "#000", fontSize: "12px", fontWeight: "700" }}>브랜드명</div>
+                                                    <div style={{ marginBottom: "5px", color: "#5d5d5d", wordBreak: "break-all", fontSize: "12px" }}>{item.title}</div>
+                                                    <div style={{ color: "#303033", lineHeight: "18px", display: "flex" }}>
+                                                        <span style={{ fontSize: "16px", fontWeight: "700", marginRight: "2px" }}>999,999</span>
+                                                        <span style={{ fontSize: "11px" }}>원</span>
                                                     </div>
                                                 </div>
-                                                <ul className="css-kkyj92 epw6wzk0">
-                                                    <li color="#1d1d1d" className="css-pcsmuw epw6wzk1">
-                                                        무료배송
-                                                    </li>
-                                                </ul>
                                             </div>
-                                        </a>
-                                        <div className="css-1th6n36 e4ed4ur12">
-                                            <button height="28" className="css-1y6oze6 e4ed4ur15">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 20 20">
-                                                    <path d="M2.24 3.425a4.758 4.758 0 0 1 6.79 0c.416.421.74.901.971 1.413.23-.512.553-.992.97-1.413a4.758 4.758 0 0 1 6.79 0 4.91 4.91 0 0 1 0 6.88L10 18.166l-7.76-7.863-.166-.176a4.911 4.911 0 0 1 .166-6.703z" fill="none" fill-rule="evenodd" stroke="#000000" stroke-width="1"></path>
-                                                </svg>
-                                            </button>
-                                            <div className="css-e8z2yt e4ed4ur13">
-                                                <svg className="css-15ro776 e4ed4ur14" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 20 20">
-                                                    <path d="M2.24 3.425a4.758 4.758 0 0 1 6.79 0c.416.421.74.901.971 1.413.23-.512.553-.992.97-1.413a4.758 4.758 0 0 1 6.79 0 4.91 4.91 0 0 1 0 6.88L10 18.166l-7.76-7.863-.166-.176a4.911 4.911 0 0 1 .166-6.703z" fill="#a0a0a0" fill-rule="evenodd" stroke="#a0a0a0" stroke-width="0.7"></path>
-                                                </svg>
-                                                6,108
-                                            </div>
-                                            <a href="https://product.29cm.co.kr/catalog/1674338#review" className="css-nv5lkn e4ed4ur16">
-                                                <svg className="e4ed4ur17 css-18fin6o e1ozur0p0" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 13 12">
-                                                    <path fill="#a0a0a0" fill-rule="evenodd" stroke="#a0a0a0" stroke-width="0.7" d="M4.146 3.95L0 4.583l3 3.075L2.292 12 6 9.95 9.708 12 9 7.658l3-3.075-4.146-.633L6 0z"></path>
-                                                </svg>
-                                                4.5 (274)
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li> 
-                            */}
-                            <li className="prodItem">상품 아이템</li>
-                            <li className="prodItem">상품 아이템</li>
-                            <li className="prodItem">상품 아이템</li>
-                            <li className="prodItem">상품 아이템</li>
-                            <li className="prodItem">상품 아이템</li>
-                            <li className="prodItem">상품 아이템</li>
-                            <li className="prodItem">상품 아이템</li>
+                                        </li>
+                                    );
+                                })
+                            ) : (
+                                <></>
+                            )}
                         </ul>
                     </div>
                 </ItemBlock>
